@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_output_type_d.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:20:30 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/11 22:08:41 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 01:57:11 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	pr_output_type_d(t_printf *pr)
 {
 	long long	value;
+	unsigned long long	u_value;
 	char		buf[100];
+	char		sign;
 	int			n;
 	
 	if (pr->length == LENGTH_HH)
@@ -28,43 +30,58 @@ void	pr_output_type_d(t_printf *pr)
 		value = (long long)va_arg(pr->ap, long long);
 	else
 		value = (int)va_arg(pr->ap, int);
-	
-	n = 0;
-	while (value > 0)
-	{
-		buf[n] = '0' + value % 10;
-		value = value / 10;
-		n++;
-	}
-	if (n == 0)
-	{
-		buf[n] = '0';
-		n++;
-	}
 
-	while (n < pr->precision)
+	sign = '\0';
+	
+	if (pr->flag_space)
+		sign = ' ';
+
+	if (pr->flag_plus)
+		sign = '+';
+	
+	if (value < 0)
+		sign = '-';
+
+	u_value = value < 0 ? -value : value;
+
+	n = 0;
+	while (u_value > 0)
 	{
-		buf[n] = '0';
+		buf[n] = '0' + u_value % 10;
+		u_value = u_value / 10;
 		n++;
 	}
-	if (pr->flag_plus)
+	if (n == 0 && pr->precision != 0)
 	{
-		buf[n] = '+';
+		buf[n] = '0';
 		n++;
 	}
 	buf[n] = '\0';
-	
-	n = pr->width - ft_strlen(buf);
-	
-	if (pr->flag_minus)
-	{
-		pr_putstr_reverse(buf);
-		pr_putstr_spaces(n);
-	}
+    if (sign)
+        pr->width -= 1;
+    if (pr->flag_zero && pr->precision == -1 && !pr->flag_minus)
+        pr->precision = pr->width;
 
+	pr->precision -= n;
+	pr->width -= n;
+    
+    if(pr->precision > 0)
+        pr->width -= pr->precision;
+	
+    if (pr->flag_minus)
+	{
+		if (sign)
+            pr_putchar(pr, sign);
+        pr_putstr_repeat(pr, pr->precision, '0');
+        pr_putstr_reverse(pr, buf);
+		pr_putstr_repeat(pr, pr->width, ' ');
+    }
 	else
 	{
-		pr_putstr_spaces(n);
-		pr_putstr_reverse(buf);
+        pr_putstr_repeat(pr, pr->width, ' ');
+        if (sign)
+            pr_putchar(pr, sign);
+        pr_putstr_repeat(pr, pr->precision, '0');
+		pr_putstr_reverse(pr, buf);
 	}
 }

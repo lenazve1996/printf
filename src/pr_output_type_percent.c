@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_putstr_reverse.c                                :+:      :+:    :+:   */
+/*   pr_output_type_percent.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/11 17:26:46 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 02:06:54 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/11 17:54:49 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/14 23:30:45 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_putstr_reverse(t_printf *pr, char *buf)
+void	pr_output_type_percent(t_printf *pr)
 {
-	int 	n;
-	n = ft_strlen(buf);
+	int		n;
 	
-	while (n > 0)
+	n = pr->width - 1;
+	if (pr->flag_minus)	
 	{
-		n--;
-		pr_putchar(pr, buf[n]);
+		pr_putchar(pr, '%');
+		pr_putstr_repeat(pr, n, ' ');
+	}
+	else
+	{
+		pr_putstr_repeat(pr, n, ' ');
+		pr_putchar(pr, '%');
 	}
 }

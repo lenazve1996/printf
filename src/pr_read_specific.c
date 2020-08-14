@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   pr_read_specific.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <ayajirob@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/05 21:54:57 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/05/05 22:16:1 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/15 02:06:05 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/15 02:06:11 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ft_printf.h"
 
@@ -60,11 +61,11 @@ void	pr_read_width(t_printf *pr)
 
 void	pr_read_precision(t_printf *pr)
 {
+	pr->precision = -1;
 	if (*pr->format == '.')
 	{
 		pr->format++;
-		pr->precision = 0;
-	
+		pr->precision = 0;	
 		while (*pr->format >= '0' && *pr->format <= '9')
 		{
 			pr->precision = pr->precision * 10 + (*pr->format - '0');

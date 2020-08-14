@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pr_putstr_repeat.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/07 21:28:48 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/13 18:50:05 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/11 17:28:09 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/14 23:25:25 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_printf.h"
 
-int main()
+void	pr_putstr_repeat(t_printf *pr, int n, char c)
 {
-    printf("|%10c|\n", 's');
-    ft_printf("%10c|\n", 's');
-	printf("|%-10.5d|\n", 2396830);
-    ft_printf("|%-10.5d|\n", 2396830);
-    return (0);
+	while (n > 0)
+	{
+		pr_putchar(pr, c);
+		n--;
+	}
 }

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_putstr_spaces.c                                 :+:      :+:    :+:   */
+/*   pr_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/11 17:28:09 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/11 22:08:48 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/11 17:26:46 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/14 23:32:43 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_putstr_spaces(int n)
+void	pr_putstr(t_printf *pr, char *buf)
 {
-	while(n)
+	
+	while (*buf)
 	{
-		ft_putchar(' ');
-		n--;
+		pr_putchar(pr, *buf);
+		buf++;
 	}
 }

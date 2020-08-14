@@ -1,50 +1,74 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/08/14 23:18:08 by ayajirob          #+#    #+#              #
+#    Updated: 2020/08/15 01:23:32 by ayajirob         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-.PHONY: all clean fclean re lib
+NAME		= libftprintf.a
 
-NAME	= test
+INC_DIR		= ./includes
+SRC_DIR		= ./src
+OBJ_DIR		= ./obj
 
-SRC_DIR = ./src
-INC_DIR = ./includes
-OBJ_DIR = ./obj
-
-SOURCES	= main.c ft_printf.c pr_putchar.c pr_while.c \
+HEADERS		= ft_printf.h
+SOURCES		= ft_printf.c \
+	pr_putchar.c \
+	pr_while.c \
 	pr_read_specific.c \
 	pr_output.c \
 	pr_output_type_d.c \
 	pr_putstr_reverse.c \
-	pr_putstr_spaces.c \
+	pr_putstr_repeat.c \
 	pr_output_type_u.c \
-	pr_output_type_с.c
+	pr_output_type_с.c \
+	pr_output_type_s.c \
+	pr_output_type_o.c \
+	pr_output_type_x.c \
+	pr_output_type_percent.c \
+	pr_putstr.c \
+	pr_putstr_precision.c \
 
-INCLUDES = ft_printf.h
- 	
-SRC		= $(addprefix $(SRC_DIR)/,$(SOURCES))
-INC		= $(addprefix $(INC_DIR)/,$(INCLUDES))
-OBJ		= $(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
+LIBFT		= ./libft
 
-FT_LIB = libft/libft.a
+CC			= gcc
+WFLAGS		= -Wall -Wextra -Werror
+IFLAGS		= -I$(INC_DIR) -I$(LIBFT)
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror 
+INCS		= $(addprefix $(INC_DIR)/, $(HEADERS))
+SRCS		= $(addprefix $(SRC_DIR)/, $(SOURCES))
+OBJS		= $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
-all:  $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ) $(FT_LIB) ./libft/libft.a
-	$(CC) $(CFLAGS) -L./libft -lft -I./libft $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	$(MAKE) -C $(LIBFT)/
+	cp $(LIBFT)/libft.a ./$(NAME)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
-obj/%.o: src/%.c $(INC) Makefile
-	@mkdir -p obj
-	$(CC) $(CFLAGS) -o $@ -c $< -I$(INC_DIR) -I./libft
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCS) Makefile
+	@mkdir -p ${@D}
+	$(CC) $(WFLAGS) $(IFLAGS) -c $< -o $@
 
-$(FT_LIB):
-	make -C ./libft
+clean:
+	$(MAKE) -C $(LIBFT)/ clean
+	rm -rf $(OBJ_DIR)
 
-clean:		
-	/bin/rm -f $(OBJ)
-	make clean -C ./libft
-
-fclean: 	clean
-	make fclean -C ./libft
-	/bin/rm -f $(NAME)
+fclean:
+	$(MAKE) -C $(LIBFT)/ fclean
+	rm -rf $(OBJ_DIR)
+	rm -rf $(NAME)
+	rm -rf test
 
 re: fclean all
+
+test: test.c $(NAME)
+	$(CC) $(IFLAGS) $^ -L. -lftprintf -o $@
+
+.PHONY: all clean fclean re

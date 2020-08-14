@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_output_type_с.c                                 :+:      :+:    :+:   */
+/*   pr_output_type_s.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/11 17:54:49 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/14 23:28:42 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/14 22:16:19 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/15 01:12:20 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_output_type_с(t_printf *pr)
+void	pr_output_type_s(t_printf *pr)
 {
 	int		n;
-	char	value;
+	char	*value;
 
-	value = (char)va_arg(pr->ap, int);
-	n = pr->width - 1;
-
+	value = (char *)va_arg(pr->ap, char *);
+    if (value == NULL)
+        value = "(null)";
+    n = ft_strlen(value);
+    if (pr->precision == -1 || pr->precision > n)
+        pr->precision = n;
+    pr->width -= pr->precision;
 	if (pr->flag_minus)	
 	{
-		pr_putchar(pr, value);
-		pr_putstr_repeat(pr, n, ' ');
+        pr_putstr_precision(pr, value, pr->precision);
+		pr_putstr_repeat(pr, pr->width, ' ');
 	}
 	else
 	{
-		pr_putstr_repeat(pr, n, ' ');
-		pr_putchar(pr, value);
+		pr_putstr_repeat(pr, pr->width, ' ');
+		pr_putstr_precision(pr, value, pr->precision);
 	}
 }
