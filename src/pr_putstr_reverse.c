@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_putchar.c                                       :+:      :+:    :+:   */
+/*   pr_putstr_reverse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/07 21:37:43 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/11 22:08:43 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/11 17:26:46 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/11 22:08:45 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_putchar(t_printf *pr, char c)
+void	pr_putstr_reverse(char *buf)
 {
-	write(STDOUT_FILENO, &c, 1);
-	pr->result++;
+	int 	n;
+	n = ft_strlen(buf);
+	
+	while (n > 0)
+	{
+		n--;
+		ft_putchar(buf[n]);
+	}
 }

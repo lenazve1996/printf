@@ -7,7 +7,15 @@ SRC_DIR = ./src
 INC_DIR = ./includes
 OBJ_DIR = ./obj
 
-SOURCES	= main.c ft_printf.c pr_putchar.c pr_while.c pr_read_specific.c void pr_output.c
+SOURCES	= main.c ft_printf.c pr_putchar.c pr_while.c \
+	pr_read_specific.c \
+	pr_output.c \
+	pr_output_type_d.c \
+	pr_putstr_reverse.c \
+	pr_putstr_spaces.c \
+	pr_output_type_u.c \
+	pr_output_type_с.c
+
 INCLUDES = ft_printf.h
  	
 SRC		= $(addprefix $(SRC_DIR)/,$(SOURCES))

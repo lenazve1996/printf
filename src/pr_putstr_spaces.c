@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_putchar.c                                       :+:      :+:    :+:   */
+/*   pr_putstr_spaces.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/07 21:37:43 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/11 22:08:43 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/11 17:28:09 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/11 22:08:48 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_putchar(t_printf *pr, char c)
+void	pr_putstr_spaces(int n)
 {
-	write(STDOUT_FILENO, &c, 1);
-	pr->result++;
+	while(n)
+	{
+		ft_putchar(' ');
+		n--;
+	}
 }

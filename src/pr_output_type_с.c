@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_putchar.c                                       :+:      :+:    :+:   */
+/*   pr_output_type_с.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/07 21:37:43 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/11 22:08:43 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/11 17:54:49 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/14 19:01:53 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_putchar(t_printf *pr, char c)
+void	pr_output_type_с(t_printf *pr)
 {
-	write(STDOUT_FILENO, &c, 1);
-	pr->result++;
+	int		n;
+	char	value;
+
+	value = (char)va_arg(pr->ap, int);
+	n = pr->width - 1;
+
+	if (pr->flag_minus)
+	{
+		ft_putchar(value);
+		pr_putstr_spaces(n);
+	}
+
+	else
+	{
+		pr_putstr_spaces(n);
+		ft_putchar(value);
+	}
 }
