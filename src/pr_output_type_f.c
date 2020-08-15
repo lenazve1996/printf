@@ -6,11 +6,28 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 03:54:14 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 20:08:38 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:44:23 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+double long		pr_define_first_sign_type_f(t_printf *pr, double long value)
+{
+	pr->first_sign = '\0';
+	if (pr->flag_space)
+		pr->first_sign  = ' ';
+	if (pr->flag_plus)
+		pr->first_sign  = '+';
+	if (value < 0)
+	{
+		pr->first_sign  = '-';
+		value = -value;
+	}
+	if (pr->precision == -1)
+		pr->precision = 6;
+	return(value);
+}
 
 unsigned long long	pr_pow10(int n)
 {
@@ -52,25 +69,13 @@ void	pr_output_type_f(t_printf *pr)
 	unsigned long long		fractional_part;
 	unsigned long long		pow10;
 	char					buf[100];
-	char					sign;
 	int						n;
 
 	if (pr->length == LENGTH_BIGL)
 		value = (double long)va_arg(pr->ap, double long);
 	else
 		value = (double long)va_arg(pr->ap, double);
-	sign = '\0';
-	if (pr->flag_space)
-		sign = ' ';
-	if (pr->flag_plus)
-		sign = '+';
-	if (value < 0)
-	{
-		sign = '-';
-		value = -value;
-	}
-	if (pr->precision == -1)
-		pr->precision = 6;
+	value = pr_define_first_sign_type_f(pr, value);
 	pow10 = pr_pow10(pr->precision + 1);
 	integer_part = (unsigned long long)value;
 	value = (value - (double long)integer_part) * (double long)pow10;
@@ -100,7 +105,7 @@ void	pr_output_type_f(t_printf *pr)
 		n++;
 	}
 	buf[n] = '\0';
-	if (sign)
+	if (pr->first_sign )
 		pr->width -= 1;
 	if (pr->flag_zero && !pr->flag_minus)
 		pr->precision = pr->width;
@@ -108,5 +113,5 @@ void	pr_output_type_f(t_printf *pr)
 	pr->width -= n;
 	if (pr->precision > 0)
 		pr->width -= pr->precision;
-	pr_putstr_for_flag_f(pr, buf, sign);
+	pr_putstr_for_flag_f(pr, buf, pr->first_sign);
 }

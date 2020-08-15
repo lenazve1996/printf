@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/07 21:31:19 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 20:19:20 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 21:06:12 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct	s_printf
 	int			precision;
 	t_length	length;
 	char		type;
+	char		first_sign;
+	//char		buf[100];
 	
 }				t_printf;
 
