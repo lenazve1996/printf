@@ -6,7 +6,7 @@
 #    By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/14 23:18:08 by ayajirob          #+#    #+#              #
-#    Updated: 2020/08/15 17:33:43 by ayajirob         ###   ########.fr        #
+#    Updated: 2020/08/16 00:43:17 by ayajirob         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SOURCES		= ft_printf.c \
 	pr_putstr_reverse.c \
 	pr_putstr_repeat.c \
 	pr_output_type_u.c \
-	pr_output_type_с.c \
+	pr_output_type_char.c \
 	pr_output_type_s.c \
 	pr_output_type_o.c \
 	pr_output_type_x.c \
@@ -35,6 +35,8 @@ SOURCES		= ft_printf.c \
 	pr_putstr.c \
 	pr_putstr_precision.c \
 	pr_output_type_f.c \
+	pr_pow10.c \
+
 
 LIBFT		= ./libft
 

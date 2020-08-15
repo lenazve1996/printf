@@ -6,16 +6,17 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 22:28:55 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 20:11:35 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/16 00:15:26 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned long long	pr_read_value_type_o(t_printf *pr)
+unsigned long long
+	pr_read_value_type_o(t_printf *pr)
 {
 	unsigned long long	value;
-	
+
 	if (pr->length == LENGTH_HH)
 		value = (unsigned char)va_arg(pr->ap, unsigned int);
 	else if (pr->length == LENGTH_H)
@@ -29,7 +30,34 @@ unsigned long long	pr_read_value_type_o(t_printf *pr)
 	return (value);
 }
 
-void		pr_putstr_for_flag_o(t_printf *pr, char *buf)
+int
+	pr_fill_buf_for_type_o(t_printf *pr, char *buf, unsigned long long value)
+{
+	int					n;
+
+	n = 0;
+	if (value == 0 && pr->precision != 0)
+	{
+		pr->flag_hash = 0;
+	}
+	n = 0;
+	while (value > 0)
+	{
+		buf[n] = '0' + value % 8;
+		value = value / 8;
+		n++;
+	}
+	if (n == 0 && pr->precision != 0)
+	{
+		buf[n] = '0';
+		n++;
+	}
+	buf[n] = '\0';
+	return (n);
+}
+
+void
+	pr_putstr_for_flag_o(t_printf *pr, char *buf)
 {
 	if (pr->flag_minus)
 	{
@@ -49,30 +77,15 @@ void		pr_putstr_for_flag_o(t_printf *pr, char *buf)
 	}
 }
 
-void	pr_output_type_o(t_printf *pr)
+void
+	pr_output_type_o(t_printf *pr)
 {
 	unsigned long long	value;
 	char				buf[100];
 	int					n;
 
 	value = pr_read_value_type_o(pr);
-	if (value == 0 && pr->precision != 0)
-	{
-		pr->flag_hash = 0;
-	}
-	n = 0;
-	while (value > 0)
-	{
-		buf[n] = '0' + value % 8;
-		value = value / 8;
-		n++;
-	}
-	if (n == 0 && pr->precision != 0)
-	{
-		buf[n] = '0';
-		n++;
-	}
-	buf[n] = '\0';
+	n = pr_fill_buf_for_type_o(pr, buf, value);
 	if (pr->flag_hash)
 		pr->width -= 1;
 	if (pr->flag_hash)

@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 02:06:05 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 20:30:46 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/16 00:37:59 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,4 @@ void	pr_read_specific(t_printf *pr)
 	pr->length = LENGTH_DEFAULT;
 	pr_read_length(pr);
 	pr_read_type(pr);
-	// printf("flag_minus = %d\n", pr->flag_minus);
-	// printf("width = %d\n", pr->width);
-	// printf("precision = %d\n", pr->precision);
-	// printf("length = %d\n", pr->length);
-	// printf("type = %c\n", pr->type);
 }

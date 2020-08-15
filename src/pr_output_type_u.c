@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:31:08 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 20:13:00 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/16 00:39:17 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 unsigned long long	pr_read_value_type_u(t_printf *pr)
 {
 	unsigned long long	value;
-	
+
 	if (pr->length == LENGTH_HH)
 		value = (unsigned char)va_arg(pr->ap, unsigned int);
 	else if (pr->length == LENGTH_H)
@@ -29,7 +29,7 @@ unsigned long long	pr_read_value_type_u(t_printf *pr)
 	return (value);
 }
 
-void		pr_putstr_for_flag_u(t_printf *pr, char *buf)
+void				pr_putstr_for_flag_u(t_printf *pr, char *buf)
 {
 	if (pr->flag_minus)
 	{
@@ -44,7 +44,8 @@ void		pr_putstr_for_flag_u(t_printf *pr, char *buf)
 		pr_putstr_reverse(pr, buf);
 	}
 }
-void	pr_output_type_u(t_printf *pr)
+
+void				pr_output_type_u(t_printf *pr)
 {
 	unsigned long long	value;
 	char				buf[100];

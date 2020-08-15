@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   pr_pow10.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <ayajirob@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 01:29:50 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/02/24 16:57:55 by ayajirob         ###   ########.fr       */
+/*   Created: 2020/08/16 00:33:21 by ayajirob          #+#    #+#             */
+/*   Updated: 2020/08/16 00:38:12 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+unsigned long long	pr_pow10(int n)
 {
-	if (alst == NULL || del == NULL)
-		return ;
-	del((*alst)->content, (*alst)->content_size);
-	free(*alst);
-	*alst = NULL;
+	unsigned long long		value;
+
+	value = 1;
+	while (n > 0)
+	{
+		value = value * 10;
+		n--;
+	}
+	return (value);
 }
