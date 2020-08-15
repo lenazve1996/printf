@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/07 22:44:23 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 02:06:49 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 04:24:24 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	pr_while(t_printf *pr)
 {
+	if (ft_strequ(pr->format, "%"))
+		return ;
 
 	while (*pr->format)
 	{

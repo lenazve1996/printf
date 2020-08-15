@@ -6,7 +6,7 @@
 #    By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/14 23:18:08 by ayajirob          #+#    #+#              #
-#    Updated: 2020/08/15 01:23:32 by ayajirob         ###   ########.fr        #
+#    Updated: 2020/08/15 04:26:18 by ayajirob         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SOURCES		= ft_printf.c \
 	pr_output_type_percent.c \
 	pr_putstr.c \
 	pr_putstr_precision.c \
+	pr_output_type_f.c \
 
 LIBFT		= ./libft
 

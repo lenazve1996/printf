@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/07 21:31:19 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 01:20:17 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 04:26:34 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	pr_output_type_x(t_printf *pr);
 void	pr_output_type_percent(t_printf *pr);
 void	pr_putstr(t_printf *pr, char *buf);
 void	pr_putstr_precision(t_printf *pr, char *buf, int n);
+void	pr_output_type_f(t_printf *pr);
 
 #endif

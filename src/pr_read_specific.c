@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 02:06:05 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 02:06:11 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 04:18:14 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ void	pr_read_type(t_printf *pr)
 
 void	pr_read_specific(t_printf *pr)
 {
+	pr->flag_minus = 0;
+	pr->flag_plus = 0;
+	pr->flag_hash = 0;
+	pr->flag_zero = 0;
+	pr->flag_space = 0;
+
 	pr->format++;
 	pr_read_flags(pr);
 	pr_read_width(pr);

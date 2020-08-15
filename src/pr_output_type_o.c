@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 22:28:55 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 01:30:33 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 04:12:41 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	pr_output_type_o(t_printf *pr)
 	else
 		value = (unsigned int)va_arg(pr->ap, unsigned int);
 
-
+ 	if (value == 0 && pr->precision != 0)
+    {
+        pr->flag_hash = 0;
+    }
 
 	n = 0;
 	while (value > 0)
@@ -48,6 +51,8 @@ void	pr_output_type_o(t_printf *pr)
 	buf[n] = '\0';
     if (pr->flag_hash)
         pr->width -= 1;
+	if (pr->flag_hash)
+        pr->precision -= 1;
     if (pr->flag_zero && pr->precision == -1 && !pr->flag_minus)
         pr->precision = pr->width;
 

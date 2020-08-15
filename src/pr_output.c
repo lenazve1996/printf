@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 23:08:41 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 01:15:45 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 04:26:03 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	pr_output(t_printf *pr)
 	else if (pr->type == 'X')
 	{
 		pr_output_type_x(pr);
+	}
+	else if (pr->type == 'f')
+	{
+		pr_output_type_f(pr);
 	}
 	else if (pr->type == '%')
 	{
