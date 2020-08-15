@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:26:46 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 02:06:54 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 18:20:24 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	pr_putstr_reverse(t_printf *pr, char *buf)
 {
-	int 	n;
+	int	n;
+
 	n = ft_strlen(buf);
-	
 	while (n > 0)
 	{
 		n--;

@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:54:49 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/14 23:28:42 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 18:14:46 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	pr_output_type_с(t_printf *pr)
 
 	value = (char)va_arg(pr->ap, int);
 	n = pr->width - 1;
-
-	if (pr->flag_minus)	
+	if (pr->flag_minus)
 	{
 		pr_putchar(pr, value);
 		pr_putstr_repeat(pr, n, ' ');

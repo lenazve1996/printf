@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:26:46 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/14 23:32:43 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 17:50:59 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	pr_putstr(t_printf *pr, char *buf)
 {
-	
 	while (*buf)
 	{
 		pr_putchar(pr, *buf);

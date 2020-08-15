@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/07 21:31:19 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 04:26:34 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 17:33:22 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		ft_printf(const char *format, ...);
 void	pr_putchar(t_printf *pr, char c);
 void	pr_while(t_printf *pr);
 void	pr_read_specific(t_printf *pr);
+void	pr_read_flags(t_printf *pr);
 void	pr_output(t_printf *pr);
 void	pr_output_type_d(t_printf *pr);
 void	pr_putstr_reverse(t_printf *pr, char *buf);

@@ -6,7 +6,7 @@
 #    By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/14 23:18:08 by ayajirob          #+#    #+#              #
-#    Updated: 2020/08/15 04:26:18 by ayajirob         ###   ########.fr        #
+#    Updated: 2020/08/15 17:33:43 by ayajirob         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SOURCES		= ft_printf.c \
 	pr_putchar.c \
 	pr_while.c \
 	pr_read_specific.c \
+	pr_read_flags.c \
 	pr_output.c \
 	pr_output_type_d.c \
 	pr_putstr_reverse.c \
