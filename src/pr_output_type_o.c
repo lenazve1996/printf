@@ -6,18 +6,16 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 22:28:55 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 18:12:26 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:11:35 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_output_type_o(t_printf *pr)
+unsigned long long	pr_read_value_type_o(t_printf *pr)
 {
 	unsigned long long	value;
-	char				buf[100];
-	int					n;
-
+	
 	if (pr->length == LENGTH_HH)
 		value = (unsigned char)va_arg(pr->ap, unsigned int);
 	else if (pr->length == LENGTH_H)
@@ -28,6 +26,36 @@ void	pr_output_type_o(t_printf *pr)
 		value = (unsigned long long)va_arg(pr->ap, unsigned long long);
 	else
 		value = (unsigned int)va_arg(pr->ap, unsigned int);
+	return (value);
+}
+
+void		pr_putstr_for_flag_o(t_printf *pr, char *buf)
+{
+	if (pr->flag_minus)
+	{
+		if (pr->flag_hash)
+			pr_putstr(pr, "0");
+		pr_putstr_repeat(pr, pr->precision, '0');
+		pr_putstr_reverse(pr, buf);
+		pr_putstr_repeat(pr, pr->width, ' ');
+	}
+	else
+	{
+		pr_putstr_repeat(pr, pr->width, ' ');
+		if (pr->flag_hash)
+			pr_putstr(pr, "0");
+		pr_putstr_repeat(pr, pr->precision, '0');
+		pr_putstr_reverse(pr, buf);
+	}
+}
+
+void	pr_output_type_o(t_printf *pr)
+{
+	unsigned long long	value;
+	char				buf[100];
+	int					n;
+
+	value = pr_read_value_type_o(pr);
 	if (value == 0 && pr->precision != 0)
 	{
 		pr->flag_hash = 0;
@@ -55,20 +83,5 @@ void	pr_output_type_o(t_printf *pr)
 	pr->width -= n;
 	if (pr->precision > 0)
 		pr->width -= pr->precision;
-	if (pr->flag_minus)
-	{
-		if (pr->flag_hash)
-			pr_putstr(pr, "0");
-		pr_putstr_repeat(pr, pr->precision, '0');
-		pr_putstr_reverse(pr, buf);
-		pr_putstr_repeat(pr, pr->width, ' ');
-	}
-	else
-	{
-		pr_putstr_repeat(pr, pr->width, ' ');
-		if (pr->flag_hash)
-			pr_putstr(pr, "0");
-		pr_putstr_repeat(pr, pr->precision, '0');
-		pr_putstr_reverse(pr, buf);
-	}
+	pr_putstr_for_flag_o(pr, buf);
 }

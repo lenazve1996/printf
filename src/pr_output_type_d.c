@@ -6,20 +6,16 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:20:30 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 18:11:29 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:04:23 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pr_output_type_d(t_printf *pr)
+long long	pr_read_value(t_printf *pr)
 {
 	long long			value;
-	unsigned long long	u_value;
-	char				buf[100];
-	char				sign;
-	int					n;
-
+	
 	if (pr->length == LENGTH_HH)
 		value = (char)va_arg(pr->ap, int);
 	else if (pr->length == LENGTH_H)
@@ -30,6 +26,38 @@ void	pr_output_type_d(t_printf *pr)
 		value = (long long)va_arg(pr->ap, long long);
 	else
 		value = (int)va_arg(pr->ap, int);
+	return (value);
+}
+
+void		pr_putstr_for_flag_d(t_printf *pr, char *buf, char sign)
+{
+	if (pr->flag_minus)
+	{
+		if (sign)
+			pr_putchar(pr, sign);
+		pr_putstr_repeat(pr, pr->precision, '0');
+		pr_putstr_reverse(pr, buf);
+		pr_putstr_repeat(pr, pr->width, ' ');
+	}
+	else
+	{
+		pr_putstr_repeat(pr, pr->width, ' ');
+		if (sign)
+			pr_putchar(pr, sign);
+		pr_putstr_repeat(pr, pr->precision, '0');
+		pr_putstr_reverse(pr, buf);
+	}
+}
+
+void	pr_output_type_d(t_printf *pr)
+{
+	long long			value;
+	unsigned long long	u_value;
+	char				buf[100];
+	char				sign;
+	int					n;
+
+	value = pr_read_value(pr);
 	sign = '\0';
 	if (pr->flag_space)
 		sign = ' ';
@@ -59,20 +87,5 @@ void	pr_output_type_d(t_printf *pr)
 	pr->width -= n;
 	if (pr->precision > 0)
 		pr->width -= pr->precision;
-	if (pr->flag_minus)
-	{
-		if (sign)
-			pr_putchar(pr, sign);
-		pr_putstr_repeat(pr, pr->precision, '0');
-		pr_putstr_reverse(pr, buf);
-		pr_putstr_repeat(pr, pr->width, ' ');
-	}
-	else
-	{
-		pr_putstr_repeat(pr, pr->width, ' ');
-		if (sign)
-			pr_putchar(pr, sign);
-		pr_putstr_repeat(pr, pr->precision, '0');
-		pr_putstr_reverse(pr, buf);
-	}
+	pr_putstr_for_flag_d(pr, buf, sign);
 }

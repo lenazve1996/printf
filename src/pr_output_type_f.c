@@ -6,7 +6,7 @@
 /*   By: ayajirob <ayajirob@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 03:54:14 by ayajirob          #+#    #+#             */
-/*   Updated: 2020/08/15 18:02:36 by ayajirob         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:08:38 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,26 @@ unsigned long long	pr_pow10(int n)
 		n--;
 	}
 	return (value);
+}
+
+void		pr_putstr_for_flag_f(t_printf *pr, char *buf, char sign)
+{
+	if (pr->flag_minus)
+	{
+		if (sign)
+			pr_putchar(pr, sign);
+		pr_putstr_repeat(pr, pr->precision, '0');
+		pr_putstr_reverse(pr, buf);
+		pr_putstr_repeat(pr, pr->width, ' ');
+	}
+	else
+	{
+		pr_putstr_repeat(pr, pr->width, ' ');
+		if (sign)
+			pr_putchar(pr, sign);
+		pr_putstr_repeat(pr, pr->precision, '0');
+		pr_putstr_reverse(pr, buf);
+	}
 }
 
 void	pr_output_type_f(t_printf *pr)
@@ -88,20 +108,5 @@ void	pr_output_type_f(t_printf *pr)
 	pr->width -= n;
 	if (pr->precision > 0)
 		pr->width -= pr->precision;
-	if (pr->flag_minus)
-	{
-		if (sign)
-			pr_putchar(pr, sign);
-		pr_putstr_repeat(pr, pr->precision, '0');
-		pr_putstr_reverse(pr, buf);
-		pr_putstr_repeat(pr, pr->width, ' ');
-	}
-	else
-	{
-		pr_putstr_repeat(pr, pr->width, ' ');
-		if (sign)
-			pr_putchar(pr, sign);
-		pr_putstr_repeat(pr, pr->precision, '0');
-		pr_putstr_reverse(pr, buf);
-	}
+	pr_putstr_for_flag_f(pr, buf, sign);
 }
